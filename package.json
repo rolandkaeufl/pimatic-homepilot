@@ -1,0 +1,28 @@
+{ "name": "pimatic-homepilot",
+  "description": "Plugin for controlling devices using Rademacher Homepilot (rademacher.de)",
+  "author": "Roland Käufl <roland@kaeufl-rudenshofen.de>",
+  "main": "homepilot",
+  "files": [
+    "device-config-schema.coffee",
+    "homepilot-config-schema.coffee",
+    "homepilot.coffee",
+    "README.md"
+  ],
+  "version": "0.00.1",
+  "homepage": "https://github.com/rolandkaeufl/pimatic-homepilot",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/rolandkaeufl/pimatic-homepilot.git"
+  },
+  "configSchema": "homepilot-config-schema.coffee",
+  "dependencies": {
+    "request-promise": "0.4.*"
+  },
+  "peerDependencies": {
+    "pimatic": "0.8.*"
+  },
+  "engines": {
+    "node": ">0.8.x",
+    "npm": ">1.1.x"
+  }
+}
