@@ -40,8 +40,19 @@ module.exports = {
     title: "HomepilotScene config options"
     type: "object"
     properties:
-      SceneId:
-        description: "Scene ID (call `curl http://HOSTNAME/rest2/Index?do=/scenes` for a list)"
-        type: "number"
-  }
+      buttons:
+        description: "Scenes to display"
+        type: "array"
+        default: []
+        format: "table"
+        items:
+          type: "object"
+          properties:
+            id:
+              type: "string"
+            text:
+              type: "string"
+            SceneId:
+              type: "number"
+  }  
 }

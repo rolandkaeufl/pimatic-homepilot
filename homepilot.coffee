@@ -6,7 +6,6 @@ module.exports = (env) ->
   Promise = env.require 'bluebird'
   assert = env.require 'cassert'
   rp = env.require 'request-promise'
-  t = env.require('decl-api').types
   
   class HomepilotPlugin extends env.plugins.Plugin
 
@@ -162,44 +161,18 @@ module.exports = (env) ->
         return @_dimlevel
       )
 
+  class HomepilotScene extends env.devices.ButtonsDevice
 
-  class HomepilotScene extends env.devices.Device
-  
-    attributes:
-      button:
-        description: "The last pressed button"
-        type: t.string
-
-    actions: 
-      buttonPressed:
-        params:
-          buttonId:
-            type: t.string
-        description: "Button pressed"
-
-    template: "buttons"
-    
-    _lastPressedButton: null
-    
     constructor: (@config) ->
-      @id = @config.id
-      @name = @config.name
-      @SceneId = @config.SceneId     
-      super()
-      
-    getButton: -> Promise.resolve(@_lastPressedButton)
+      @id = config.id
+      @name = config.name
+      super(config)
 
     buttonPressed: (buttonId) ->
       for b in @config.buttons
         if b.id is buttonId
-          @_lastPressedButton = b.id
-          @emit 'button', b.id
-          return plugin.sendSceneCommand(@SceneId).then( =>
-            return Promise.resolve()
-            throw new Error("No button with the id #{buttonId} found")
-          ).catch( (e) =>
-            env.logger.error("scene call failed with #{e.message}")          
-          )
-  
+          return plugin.sendSceneCommand(b.SceneId)
+      throw new Error("No scene with the id #{buttonId} found")
+
   plugin = new HomepilotPlugin
   return plugin

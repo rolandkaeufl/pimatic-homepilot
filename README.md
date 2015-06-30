@@ -38,11 +38,22 @@ For example:
       "interval": 30
     },
     {
-      "name": "Scene 1",
-      "id": "hp_scene",
+      "name": "Scenes",
+      "id": "hp_scenes",
       "class": "HomepilotScene",
-      "SceneId": 5006
+      "buttons": [
+        {
+          "id": "hp-scene-1",
+          "text": "all up",
+          "SceneId": 5005
+        },
+        {
+          "id": "hp-scene-2",
+          "text": "all down",
+          "SceneId": 5006
+        }
+      ]
     }
 
 Figure out the `DeviceId` by calling `curl http://HOSTNAME/rest2/Index?do=/devices` or the `SceneId` by calling `curl http://HOSTNAME/rest2/Index?do=/scenes`.
-If the `interval` option is greater than 0 then the state of the device is updated automatically after the defined seconds (default = 60, disable = 0).
+If the `interval` option is greater than 0 then the state of the device is updated automatically after the defined seconds (default = 60, disable = 0), not nessasary for the scenes.
